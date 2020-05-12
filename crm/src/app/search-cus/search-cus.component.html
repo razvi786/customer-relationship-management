@@ -1,0 +1,49 @@
+<div class="col-6 mx-auto">
+    <h1 class="text-center my-3">Search Customer</h1>
+    <div class="">
+        <form class="row">
+            <div class="col-12">
+                <input class="form-control text-center" type="number" placeholder="Search Customer..." name="id"
+                    [formControl]="id" autofocus>
+            </div>
+            <div class="col-12 text-center">
+                <button class="btn btn-light m-3" (click)="searchCustomer()">Search <i
+                        class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="customer" class="form-group border p-1 p-lg-5 border-curved mt-0 bg-light">
+        <div class="">
+
+            <img [src]="customer.dp" alt="Profile Picture" class="avatar m-3">
+
+            <label class="p-2 h5" for="id">ID:</label>
+            <span class="p-2 lead">{{customer.customerId}}</span>
+            <br>
+
+            <label class="p-2 h5" for="username">Username:</label>
+            <span class="p-2 lead">{{customer.name}}</span>
+            <br>
+
+            <label class="p-2 h5" for="email">Email:</label>
+            <span class="p-2 lead">{{customer.email}}</span>
+            <br>
+
+            <label class="p-2 h5" for="phone">Mobile Number:</label>
+            <span class="p-2 lead">{{customer.mobileNumber}}</span>
+            <br>
+
+            <label class="p-2 h5" for="phone">Mobile Number:</label>
+            <span class="p-2 lead">{{customer.circle}}</span>
+            <br>
+
+            <button class="btn btn-outline-primary text-dark text-center form-control my-3"
+                routerLink="/create-subscription">Create Subscription</button>
+
+            <button class="btn btn-outline-danger text-dark text-center form-control my-3" (click)="viewSubscriptions()">View Subscriptions</button>
+
+
+        </div>
+    </div>
+</div>

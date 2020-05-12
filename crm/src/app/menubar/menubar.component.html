@@ -1,0 +1,46 @@
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <!-- Brand/logo -->
+      <a class="navbar-brand" href="#">
+        <img src="../assets/logo.png" alt="logo" width="45"  class="d-inline-block align-middle mr-2">
+      </a>
+
+      <ul class="navbar-nav">
+        <li><a routerLink="/home" class="nav-link">Home</a></li>
+
+        <li class="dropdown">
+          <a  routerLink="Customer" class="nav-link" data-toggle="dropdown" href="#">&nbsp;Customer
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/cus-details" >Create Customer</a></li>
+            <li><a href="/search-cus">Search Customer</a></li>
+            
+          </ul>
+        </li>
+
+        
+    </ul>
+      
+      <!-- Links -->
+      <ul class="navbar-nav navbar-collapse justify-content-end">
+
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="/login"><i class="fas fa-sign-in-alt"></i>&nbsp;SignIn</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#" routerLink="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
+        </li>
+    
+             
+        
+        
+        
+      </ul>
+    </nav>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+    
+
+   
+  

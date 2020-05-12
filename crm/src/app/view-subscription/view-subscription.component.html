@@ -1,0 +1,24 @@
+<div class="">
+  <h1 class="text-center my-3 mx-auto">Active Subscriptions</h1>
+  <h1 *ngIf="subscriptions.length==0" class="bg-warning h2 text-center m-3 col-10 mx-auto">
+    No Active Subscriptions Found.
+  </h1>
+    <table *ngIf="subscriptions.length>0" class="table table-light table-striped table-hover border-curved m-3 text-center col-10 mx-auto">
+        <thead>
+          <tr>
+            <th>Subscription Id</th>
+            <th>Subscription Name</th>
+            <th>Expiry Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let subscription of subscriptions">
+            <td>{{subscription.id}}</td>
+            <td>{{subscription.name}}</td>
+            <td>{{subscription.expiryDate}}</td>
+          </tr>
+          
+
+    </tbody>
+    </table>
+</div>
