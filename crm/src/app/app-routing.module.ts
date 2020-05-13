@@ -29,6 +29,7 @@ const routes: Routes = [
      {
         path:'create-subscription/:customerId',
         loadChildren:()=>import('./create-subscription/create-subscription.module').then(m=>m.CreateSubscriptionComponentModule),
+        canActivate:[AuthGuard]
       },
       {
         path:'view-subscription/:customerId',
