@@ -45,7 +45,7 @@
     </form>
    
 </div>-->
-<div class="login-form">
+<div class="customer-form">
 
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <h2 class="text-center">Customer Details</h2> 
@@ -74,16 +74,7 @@
             <label for="circle"><b>Circle</b></label>
             <input [(ngModel)]="customer1.circle" type="text" class="form-control" placeholder="Circle" name="circle" required="required">
         </div>
-
-        <div class="form-group">
-            <label for="circle"><b>dp</b></label>
-            <input [(ngModel)]="customer1.dp" type="text" class="form-control" placeholder="Enter dp" name="dp"  required="required">
-        </div>
-        
-
-
-        
-        <div class="form-group">
+ <div class="form-group">
             
             <button type="submit"  class="btn btn-primary btn-block">Create</button>
         </div>

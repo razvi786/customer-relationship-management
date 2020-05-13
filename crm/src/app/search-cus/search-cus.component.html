@@ -34,12 +34,13 @@
             <span class="p-2 lead">{{customer.mobileNumber}}</span>
             <br>
 
-            <label class="p-2 h5" for="phone">Mobile Number:</label>
+            <label class="p-2 h5" for="phone">circle:</label>
             <span class="p-2 lead">{{customer.circle}}</span>
             <br>
 
             <button class="btn btn-outline-primary text-dark text-center form-control my-3"
-                routerLink="/create-subscription">Create Subscription</button>
+            (click)="createSubscriptions()">Create Subscription</button>
+                <!--routerLink="/create-subscription"--> 
 
             <button class="btn btn-outline-danger text-dark text-center form-control my-3" (click)="viewSubscriptions()">View Subscriptions</button>
 
