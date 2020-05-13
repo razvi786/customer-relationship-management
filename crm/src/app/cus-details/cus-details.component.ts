@@ -22,7 +22,6 @@ export class CusDetailsComponent implements OnInit {
     console.log(this.customer1);
     this.database.createCustomer(this.customer1)
   .subscribe(customer1=>{alert("CustomerAdded.")});
-  this.router.navigate(['logout']);
 
   }
   onSubmit(form:NgForm){

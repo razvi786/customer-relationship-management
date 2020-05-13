@@ -31,5 +31,9 @@ export class SearchCusComponent implements OnInit {
   viewSubscriptions(){
     this.router.navigate(['view-subscription',this.customerId])
   }
+  createSubscriptions()
+  {
+    this.router.navigate(['create-subscription',this.customerId])
+  }
 
 }
