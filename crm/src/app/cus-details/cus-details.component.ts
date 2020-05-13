@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customermodel';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { CustomerserviceService } from '../customerservice.service';
 //import { CustomerserviceService } from '../customerservice.service';
 
@@ -12,20 +12,27 @@ import { CustomerserviceService } from '../customerservice.service';
 })
 export class CusDetailsComponent implements OnInit {
 
-  customer1: Customer= new Customer();
-  constructor(private database:CustomerserviceService ,private router: Router) { }
+  constructor(private database:CustomerserviceService, private router: Router, private formBuilder:FormBuilder) { }
+
+  customerForm:FormGroup;
 
   ngOnInit(): void {
+    this.customerForm=this.formBuilder.group({
+      name:['',Validators.required],
+      mobileNumber:['',Validators.required],
+      email:['',Validators.required],
+      circle:['Andhra Pradesh',Validators.required],
+      dp:['../../assets/images/default.png']
+    })
   }
   addCustomer(){
-    console.log("function");
-    console.log(this.customer1);
-    this.database.createCustomer(this.customer1)
-  .subscribe(customer1=>{alert("CustomerAdded.")});
-
+    this.database.createCustomer(this.customerForm.value).subscribe(data=>{
+      alert("Customer Created")
+      this.customerForm.setControl("name",new FormControl('',Validators.required))
+      this.customerForm.setControl("mobileNumber",new FormControl('',Validators.required))
+      this.customerForm.setControl("email",new FormControl('',Validators.required))
+      this.customerForm.setControl("circle",new FormControl('Andhra Pradesh',Validators.required))
+    });
   }
-  onSubmit(form:NgForm){
-    this.addCustomer();
-}
 
 }

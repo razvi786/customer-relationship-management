@@ -16,7 +16,10 @@ import com.cts.crm.model.Customer;
 import com.cts.crm.model.Subscription;
 import com.cts.crm.model.User;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
+@Slf4j
 public class DataServiceRestTemplate {
 
 	@Autowired
@@ -35,6 +38,7 @@ public class DataServiceRestTemplate {
 	}
 
 	public ResponseEntity<Customer> searchCustomerById(Integer id) {
+		log.info("Get Customer called");
 		return restTemplate.exchange(properties.getGetCustomer(), HttpMethod.GET,
 				restTemplateUtil.getCustomerHttpEntity(),
 				Customer.class, new HashMap<String,Integer>(){

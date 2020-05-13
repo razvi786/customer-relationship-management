@@ -16,8 +16,11 @@ import com.cts.crm.model.Customer;
 import com.cts.crm.service.rest.DataServiceRestTemplate;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @CrossOrigin(origins="*")
+@Slf4j
 public class CustomerRestController {
 	
 	@Autowired
@@ -33,6 +36,7 @@ public class CustomerRestController {
 	@GetMapping("customers/{id}")
 	@HystrixCommand(fallbackMethod ="getFallbackCustomer",ignoreExceptions = HttpClientErrorException.class)
 	public ResponseEntity<Customer> searchCustomerById(@PathVariable Integer id) {
+		log.info("Get Customer called");
 		Customer customer = dataServiceRestTemplate.searchCustomerById(id).getBody();
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}

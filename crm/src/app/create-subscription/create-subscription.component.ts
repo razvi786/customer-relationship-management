@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SubscriptionserviceService } from '../subscriptionservice.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from '../subscriptionmodel';
 import { CustomerserviceService } from '../customerservice.service';
+import { Customer } from '../customermodel';
+import { formatDate, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-subscription',
@@ -12,22 +14,38 @@ import { CustomerserviceService } from '../customerservice.service';
 })
 export class CreateSubscriptionComponent implements OnInit {
 
-subscription1:Subscription=new Subscription();
-constructor(private service:SubscriptionserviceService,private router: Router,private route:ActivatedRoute) { }
-id=this.route.snapshot.paramMap.get("customerId")
+  constructor(private subscriptionService:SubscriptionserviceService, private formBuilder:FormBuilder, private router: Router, private route:ActivatedRoute, private datePipe:DatePipe) { }
 
-ngOnInit(): void {
-  this.subscription1.customerId=this.id;
-  this.subscription1.active=true;
-}
-addSubscription(){
- console.log("customer Id"+this.id);
-  console.log(this.subscription1);
-  this.service.createSubscription(this.subscription1)
-  .subscribe(subscription1=>{alert("subscription added")});
-}
+  id:number;
+  subscriptionForm:FormGroup;
+  expiryDate:string;
 
-onSubmit(form:NgForm){
-  this.addSubscription();
-}
+  ngOnInit(): void {
+    this.id=+this.route.snapshot.paramMap.get("customerId")
+    let date:Date=new Date();
+    this.expiryDate=this.datePipe.transform(date,'yyyy-MM-dd')
+    this.subscriptionForm=this.formBuilder.group({
+      name:['',Validators.required],
+      expiryDate:[this.expiryDate,Validators.required],
+      id:[this.id,Validators.required]
+    })
+  }
+
+  addSubscription(){
+    let subscription:Subscription=new Subscription();
+    subscription.name=this.subscriptionForm.controls.name.value;
+    subscription.expiryDate=this.subscriptionForm.controls.expiryDate.value;
+    subscription.active=true;
+    let customer:Customer=new Customer();
+    customer.customerId=this.subscriptionForm.controls.id.value;
+    subscription.customerId=customer;
+    
+    this.subscriptionService.createSubscription(subscription).subscribe(data=>{
+      alert("subscription added")
+      this.subscriptionForm.setControl('name',new FormControl('',Validators.required))
+      this.subscriptionForm.setControl('expiryDate',new FormControl(this.expiryDate,Validators.required))
+    });
+
+  }
+
 }

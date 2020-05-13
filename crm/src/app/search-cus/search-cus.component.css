@@ -55,3 +55,10 @@
        padding: 14px;
      }
      
+     .stroke
+{
+   
+        font-size: 3em;
+        margin: 0;
+        -webkit-text-stroke: 2px lightgoldenrodyellow;
+}

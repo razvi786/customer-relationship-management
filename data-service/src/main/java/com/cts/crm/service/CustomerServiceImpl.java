@@ -1,5 +1,7 @@
 package com.cts.crm.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +10,11 @@ import com.cts.crm.model.Customer;
 import com.cts.crm.repo.CustomerJdbcRepo;
 import com.cts.crm.repo.CustomerJpaRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Transactional
+@Slf4j
 public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
@@ -30,6 +36,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer searchCustomerById(int id) {
+		log.info("Get Customer called");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return customerJpaRepo.findById(id).orElse(null);
 		else

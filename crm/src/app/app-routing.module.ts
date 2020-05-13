@@ -10,8 +10,7 @@ const routes: Routes = [
      children:[
       {
         path: '', 
-        redirectTo: '/login',
-        pathMatch: 'full'
+        loadChildren:()=>import('./home/home.module').then(m=>m.HomeComponentModule)
       },
       {
         path:'home',
@@ -36,22 +35,16 @@ const routes: Routes = [
         loadChildren:()=>import('./view-subscription/view-subscription.module').then(m=>m.ViewSubscriptionComponentModule),
         canActivate:[AuthGuard]
       },
+      { 
+        path: 'login',  
+        loadChildren: () => import('./login/login.module'). then(m => m.LoginComponentModule)
+       },
       {
         path:'logout',
         loadChildren:()=>import('./logout/logout.module').then(m=>m.LogoutComponentModule)
       }
      ]
-   },
-   { 
-    path: 'login',  
-    loadChildren: () => import('./login/login.module'). then(m => m.LoginComponentModule)
-   },
-   { 
-      path: '', 
-      redirectTo: '/login',
-      pathMatch: 'full' 
-    },
-   
+   }
 
 ];
 

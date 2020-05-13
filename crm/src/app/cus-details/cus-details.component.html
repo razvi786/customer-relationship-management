@@ -47,36 +47,41 @@
 </div>-->
 <div class="customer-form">
 
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <h2 class="text-center">Customer Details</h2> 
-
-       <!--<div class="form-group">
-            <label for="Id"><b>Customer Id</b></label>
-            <input type="text" class="form-control" placeholder="Enter Id" required="required">
-        </div>--> 
+    <form [formGroup]="customerForm" (ngSubmit)="addCustomer()">
+        <h2 class="text-center stroke">Create Customer</h2>
         
         <div class="form-group">
             <label for="customername"><b>Name</b></label>
-            <input [(ngModel)]="customer1.name" type="text" class="form-control" placeholder="Enter Name" name="name" required="required">
+            <input type="text" class="form-control" placeholder="Enter Name" name="name" formControlName="name" required="required">
         </div>
 
         <div class="form-group">
             <label for="phone number"><b>Phone Number</b></label>
-            <input [(ngModel)]="customer1.mobileNumber" type="text" class="form-control" placeholder="Enter number" name="mobileNumber"  required="required">
+            <input formControlName="mobileNumber" type="number" class="form-control" placeholder="Enter number" name="mobileNumber"  required="required">
         </div>
-
 
         <div class="form-group">
             <label for="emailid"><b>EmailId</b></label>
-            <input  [(ngModel)]="customer1.email" type="text" class="form-control" placeholder="Enter Email" name="email" required="required">
+            <input formControlName="email" type="email" class="form-control" placeholder="Enter Email" name="email" required="required">
         </div>
+
         <div class="form-group">
             <label for="circle"><b>Circle</b></label>
-            <input [(ngModel)]="customer1.circle" type="text" class="form-control" placeholder="Circle" name="circle" required="required">
+            <select formControlName="circle" class="form-control" name="circle" required="required">
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Guntur">Guntur</option>
+            </select>
         </div>
  <div class="form-group">
+
+    <div class="form-group">
+        <label for="dp"><b>DP</b></label>
+        <input formControlName="dp" name="dp" value="../../assets/images/default.png" class="form-control" placeholder="Enter DP" required="required" disabled>
+    </div>
             
-            <button type="submit"  class="btn btn-primary btn-block">Create</button>
+            <button type="submit"  class="btn btn-primary btn-block" [disabled]="!customerForm.valid">Create</button>
         </div>
               
     </form>

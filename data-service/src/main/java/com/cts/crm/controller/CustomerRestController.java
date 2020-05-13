@@ -13,7 +13,10 @@ import com.cts.crm.exception.CustomerNotFoundException;
 import com.cts.crm.model.Customer;
 import com.cts.crm.service.CustomerService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class CustomerRestController {
 	
 	@Autowired
@@ -27,6 +30,7 @@ public class CustomerRestController {
 	
 	@GetMapping("customers/{id}")
 	public ResponseEntity<Customer> searchCustomerById(@PathVariable int id) {
+		log.info("Get Customer called");
 		Customer customer = customerService.searchCustomerById(id);
 		if(customer==null)
 			throw new CustomerNotFoundException("id: "+id+" not found");

@@ -1,28 +1,23 @@
 <div class="subscription-form">
 
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <h2 class="text-center">subscription Details</h2> 
+<form [formGroup]="subscriptionForm" (ngSubmit)="addSubscription()">
+        <h2 class="text-center stroke">Create Subscription</h2> 
         
         <div class="form-group">
             <label for="subscriptionname"><b>Name</b></label>
-            <input [(ngModel)]="subscription1.name" type="text" class="form-control" placeholder="Enter Name" name="name" required="required">
+            <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" required="required">
         </div>
         <div class="form-group">
             <label for="date"><b>Expiry date</b></label>
-            <input [(ngModel)]="subscription1.expiryDate" type="date" class="form-control" name="date" required>
-
+            <input type="date" class="form-control" formControlName="expiryDate" required>
         </div>
-        <!-- <div class="form-group">
-            <label for="active"><b>Active</b></label>
-            <input  [(ngModel)]="subscription1.active" type="boolean" class="form-control" name="active" required="required">
-        </div>-->
         <div class="form-group">
             <label for="customerId"><b>CustomerId</b></label>
-            <input disabled [(ngModel)]="subscription1.customerId" type="text" class="form-control" name="customerId" required="required">
+            <input disabled type="number" class="form-control" formControlName="id" required="required">
         </div>
  <div class="form-group">
             
-            <button type="submit"  class="btn btn-primary btn-block">Create</button>
+            <button type="submit" [disabled]="!subscriptionForm.valid" class="btn btn-primary btn-block">Create</button>
         </div>
               
     </form>

@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import { MenubarComponent } from './menubar/menubar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './http-interceptor.service';
+import { DatePipe } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenubarComponent
+    MenubarComponent,
+    FooterComponent
     /*LoginComponent,
     MenubarComponent,
     CusDetailsComponent,
@@ -31,7 +34,8 @@ import { HttpInterceptorService } from './http-interceptor.service';
   providers: [
     {
       provide:HTTP_INTERCEPTORS, useClass:HttpInterceptorService, multi:true
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

@@ -5,5 +5,5 @@ export class Subscription{
     name: string;
     expiryDate: Date;
     active: boolean;
-    customerId: String;
+    customerId: Customer;
 }

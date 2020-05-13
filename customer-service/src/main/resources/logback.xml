@@ -3,7 +3,7 @@
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <!-- <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg %mdc%n</pattern> -->
-      <pattern>%d{HH:mm} %highlight(%-5level) - [%mdc] %msg%n </pattern>
+      <pattern>%C{0} %M %X{transId} %m%n </pattern>
     </encoder>
   </appender>
   <root level="info">
