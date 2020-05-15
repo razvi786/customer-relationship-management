@@ -1,7 +1,7 @@
 package com.cts.crm.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,10 +27,10 @@ import lombok.ToString;
 public class Subscription implements Serializable{
 	private static final long serialVersionUID = -1491107162638602202L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int id;
 	private String name;
-	private LocalDate expiryDate;
+	private Date expiryDate;
 	private boolean active;
 	@ManyToOne
 	@JoinColumn(name="customerId")

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
+import com.cts.crm.config.TransactionUtil;
 import com.cts.crm.exception.ServerDownException;
 import com.cts.crm.model.Customer;
 import com.cts.crm.service.rest.DataServiceRestTemplate;
@@ -26,19 +27,25 @@ public class CustomerRestController {
 	@Autowired
 	DataServiceRestTemplate dataServiceRestTemplate;
 	
+	@Autowired
+	TransactionUtil transactionUtil;
+	
 	@PostMapping("customers")
 	@HystrixCommand(fallbackMethod ="postFallbackCustomer",ignoreExceptions = HttpClientErrorException.class)
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+		transactionUtil.generateTransactionId("CREATE_CUSTOMER");
+		log.info("Inside Create Customer [Customer Controller]");
 		Customer createdCustomer = dataServiceRestTemplate.createCustomer(customer).getBody();
-		return new ResponseEntity<Customer>(createdCustomer,HttpStatus.CREATED);
+		return new ResponseEntity<>(createdCustomer,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("customers/{id}")
 	@HystrixCommand(fallbackMethod ="getFallbackCustomer",ignoreExceptions = HttpClientErrorException.class)
 	public ResponseEntity<Customer> searchCustomerById(@PathVariable Integer id) {
-		log.info("Get Customer called");
+		transactionUtil.generateTransactionId("GET_CUSTOMER");
+		log.info("Inside Search Customer By Id [Customer Controller]");
 		Customer customer = dataServiceRestTemplate.searchCustomerById(id).getBody();
-		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
+		return new ResponseEntity<>(customer,HttpStatus.OK);
 	}
 	
 	//	Hystrix Fallback Methods	

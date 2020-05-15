@@ -11,8 +11,11 @@ import com.cts.crm.model.Subscription;
 import com.cts.crm.repo.SubscriptionJdbcRepo;
 import com.cts.crm.repo.SubscriptionJpaRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 @Repository
+@Slf4j
 public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
@@ -26,6 +29,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	
 	@Override
 	public Subscription getSubscriptionById(int id) {
+		log.info("Inside Get Subscription By Id [Subscription Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return subscriptionJpaRepo.findById(id).orElse(null);
 		else
@@ -34,6 +38,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	
 	@Override
 	public Subscription createSubscription(Subscription subscription) {
+		log.info("Inside Create Subscription [Subscription Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return subscriptionJpaRepo.save(subscription);
 		else
@@ -42,6 +47,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	
 	@Override
 	public List<Subscription> getAllSubscriptions() {
+		log.info("Inside Get All Subscriptions [Subscription Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return subscriptionJpaRepo.findAll();
 		else
@@ -50,6 +56,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	
 	@Override
 	public List<Subscription> viewActiveSubscriptions(int customerId) {
+		log.info("Inside View Active Subscriptions [Subscription Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return subscriptionJpaRepo.viewActiveSubscriptions(customerId);
 		else
@@ -58,6 +65,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	
 	@Override
 	public void batchInactiveSubscription(List<Subscription> subscriptions) {
+		log.info("Inside Batch Inactive Subscriptions [Subscription Service]");
 		subscriptionJdbcRepo.batchInactiveSubscription(subscriptions);
 	}
 	

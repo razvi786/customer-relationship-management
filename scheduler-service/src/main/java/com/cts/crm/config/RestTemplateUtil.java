@@ -2,6 +2,7 @@ package com.cts.crm.config;
 
 import java.util.List;
 
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,15 +19,16 @@ public class RestTemplateUtil {
 	public HttpHeaders getHeaders() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setBasicAuth(properties.getUsername(), properties.getPassword());
+		headers.set("Transaction-Id", MDC.get("transactionId"));
 		return headers;
 	}
 	
 	//Subscription HttpEntity's
 	public HttpEntity<List<Subscription>> getSubscriptionHttpEntity(){
-		return new HttpEntity<List<Subscription>>(getHeaders());
+		return new HttpEntity<>(getHeaders());
 	}
 	public HttpEntity<List<Subscription>> inactiveSubscriptionHttpEntity(List<Subscription> subscriptions){
-		return new HttpEntity<List<Subscription>>(subscriptions,getHeaders());
+		return new HttpEntity<>(subscriptions,getHeaders());
 	}
 
 }

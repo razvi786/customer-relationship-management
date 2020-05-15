@@ -24,7 +24,7 @@ import lombok.ToString;
 public class User implements Serializable{
 	private static final long serialVersionUID = -7190016894803223306L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int id;
 	private String name;
 	private String email;

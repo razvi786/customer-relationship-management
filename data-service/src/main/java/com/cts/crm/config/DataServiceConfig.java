@@ -16,6 +16,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class DataServiceConfig {
 	
 	//Properties	
+	@Value("${service.name}")
+	public String serviceName;
+	
 	@Value("${spring.security.username}")
 	private String username;
 	

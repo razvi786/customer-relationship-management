@@ -1,6 +1,5 @@
 package com.cts.crm.repo;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -41,7 +40,7 @@ public class SubscriptionJdbcRepo {
 			PreparedStatement ps=con.prepareStatement(properties.getSubscriptionSave(),Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, subscription.getId());
 			ps.setBoolean(2, subscription.isActive());
-			ps.setDate(3, Date.valueOf(subscription.getExpiryDate()));
+			ps.setDate(3, subscription.getExpiryDate());
 			ps.setString(4, subscription.getName());
 			ps.setInt(5, subscription.getCustomerId().getCustomerId());
 			return ps;

@@ -18,6 +18,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class CustomerServiceConfig {
 	
 	//Properties
+	
+	@Value("${service.name}")
+	private String serviceName;
+	
 	@Value("${spring.security.username}")
 	private String username;
 	

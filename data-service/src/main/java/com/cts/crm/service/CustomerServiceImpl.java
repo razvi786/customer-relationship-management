@@ -28,6 +28,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer createCustomer(Customer customer) {
+		log.info("Inside Create Customer [Customer Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return customerJpaRepo.save(customer);
 		else
@@ -36,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer searchCustomerById(int id) {
-		log.info("Get Customer called");
+		log.info("Inside Search Customer By Id [Customer Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return customerJpaRepo.findById(id).orElse(null);
 		else

@@ -1,7 +1,7 @@
 package com.cts.crm.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +24,7 @@ public class Subscription implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private LocalDate expiryDate;
+	private Date expiryDate;
 	private boolean active;
 	private Customer customerId;	
 }

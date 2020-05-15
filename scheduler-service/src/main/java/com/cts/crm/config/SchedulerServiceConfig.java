@@ -20,6 +20,9 @@ public class SchedulerServiceConfig {
 		return new RestTemplate();
 	}
 	
+	@Value("${service.name}")
+	private String serviceName;
+	
 	@Value("${spring.security.username}")
 	private String username;
 	

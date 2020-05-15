@@ -41,7 +41,7 @@ export class CreateSubscriptionComponent implements OnInit {
     subscription.customerId=customer;
     
     this.subscriptionService.createSubscription(subscription).subscribe(data=>{
-      alert("subscription added")
+      alert("Subscription Added")
       this.subscriptionForm.setControl('name',new FormControl('',Validators.required))
       this.subscriptionForm.setControl('expiryDate',new FormControl(this.expiryDate,Validators.required))
     });

@@ -8,7 +8,10 @@ import com.cts.crm.model.User;
 import com.cts.crm.repo.UserJdbcRepo;
 import com.cts.crm.repo.UserJpaRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
@@ -22,6 +25,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User createUser(User user) {
+		log.info("Inside Create User [User Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return userJpaRepo.save(user);
 		else
@@ -30,6 +34,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUserByEmailAndPassword(String email, String password) {
+		log.info("Inside Get User By Email and Password [User Service]");
 		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
 			return userJpaRepo.findByEmailAndPassword(email, password).orElse(null);
 		else

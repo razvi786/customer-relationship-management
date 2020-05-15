@@ -2,6 +2,7 @@ package com.cts.crm.config;
 
 import java.util.List;
 
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,31 +21,32 @@ public class RestTemplateUtil {
 	public HttpHeaders getHeaders() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setBasicAuth(properties.getUsername(), properties.getPassword());
+		headers.set("Transaction-Id", MDC.get("transactionId"));
 		return headers;
 	}
 	
 	//Customer HttpEntity's
 	public HttpEntity<Customer> getCustomerHttpEntity(){
-		return new HttpEntity<Customer>(getHeaders()); 
+		return new HttpEntity<>(getHeaders()); 
 	}
 	public HttpEntity<Customer> postCustomerHttpEntity(Customer customer){
-		return new HttpEntity<Customer>(customer,getHeaders()); 
+		return new HttpEntity<>(customer,getHeaders()); 
 	}
 	
 	//User HttpEntity's
 	public HttpEntity<User> getUserHttpEntity(){
-		return new HttpEntity<User>(getHeaders()); 
+		return new HttpEntity<>(getHeaders()); 
 	}
 	public HttpEntity<User> postUserHttpEntity(User user){
-		return new HttpEntity<User>(user,getHeaders()); 
+		return new HttpEntity<>(user,getHeaders()); 
 	}
 	
 	//Subscription HttpEntity's
 	public HttpEntity<List<Subscription>> getSubscriptionHttpEntity(){
-		return new HttpEntity<List<Subscription>>(getHeaders()); 
+		return new HttpEntity<>(getHeaders()); 
 	}
 	public HttpEntity<Subscription> postSubscriptionHttpEntity(Subscription subscription){
-		return new HttpEntity<Subscription>(subscription,getHeaders()); 
+		return new HttpEntity<>(subscription,getHeaders()); 
 	}
 
 }
