@@ -41,8 +41,8 @@ public class SubscriptionRestController {
 	public ResponseEntity<String> batchInactiveSubscriptions(@RequestBody List<Subscription> subscriptions,@RequestHeader HttpHeaders headers) {
 		transactionUtil.setTransactionId(headers);
 		log.info("Inside Batch Inactive Subscriptions [Subscription Controller]");
-		subscriptionService.batchInactiveSubscription(subscriptions);
-		return new ResponseEntity<>("Today's Subscriptions are now Inactive.", HttpStatus.OK);
+		String message = subscriptionService.batchInactiveSubscription(subscriptions);
+		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
 	
 	@GetMapping("subscriptions")

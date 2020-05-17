@@ -26,43 +26,31 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-	public final ResponseEntity<Object> handleMethodArgumentTypeMismatchException(Exception ex, WebRequest request){
+	@ExceptionHandler({UserNotFoundException.class,CustomerNotFoundException.class,SubscriptionNotFoundException.class})
+	public final ResponseEntity<Object> handleNotFoundException(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(UserNotFoundException.class)
-	public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request){
+	@ExceptionHandler({CustomerNotCreatedException.class,UserNotCreatedException.class,SubscriptionNotCreatedException.class,SQLException.class,MethodArgumentTypeMismatchException.class})
+	public final ResponseEntity<Object> handleBadRequestException(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler(CustomerNotFoundException.class)
-	public final ResponseEntity<Object> handleCustomerNotFoundException(Exception ex, WebRequest request){
-		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.NOT_FOUND);
-	}
-	
-	@ExceptionHandler(IncorrectResultSizeDataAccessException.class)
-	public final ResponseEntity<Object> handleIncorrectResultSizeDataAccessException(Exception ex, WebRequest request){
+	@ExceptionHandler({IncorrectResultSizeDataAccessException.class,EmptyResultDataAccessException.class})
+	public final ResponseEntity<Object> handleNoUserFoundException(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), "No user found with given Username and Password", request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(EmptyResultDataAccessException.class)
-	public final ResponseEntity<Object> handleEmptyResultDataAccessException(Exception ex, WebRequest request){
-		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), "No user found with given Username and Password", request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.NOT_FOUND);
-	}
-	
-	@ExceptionHandler(SQLException.class)
-	public final ResponseEntity<Object> handleSQLException(Exception ex, WebRequest request){
+	@ExceptionHandler(SubscriptionException.class)
+	public final ResponseEntity<Object> handleSubscriptionException(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(response,HttpStatus.NO_CONTENT);
 	}
 	
 	//Handling Already Handled Exceptions
@@ -70,13 +58,13 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@Override
 	public final ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), "U Need to pass the Body with POST Method", request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 	}
 	
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.METHOD_NOT_ALLOWED);
+		return new ResponseEntity<>(response,HttpStatus.METHOD_NOT_ALLOWED);
 	}
 	
 }

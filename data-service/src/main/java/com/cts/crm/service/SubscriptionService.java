@@ -14,7 +14,7 @@ public interface SubscriptionService {
 	
 	public Subscription createSubscription(Subscription subscription);
 	
-	public void batchInactiveSubscription(List<Subscription> subscriptions);
+	public String batchInactiveSubscription(List<Subscription> subscriptions);
 	
 	//Unused in this project
 	

@@ -29,19 +29,21 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public Customer createCustomer(Customer customer) {
 		log.info("Inside Create Customer [Customer Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return customerJpaRepo.save(customer);
-		else
-			return customerJdbcRepo.save(customer);
+		return customerJpaRepo.save(customer);
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return customerJpaRepo.save(customer);
+//		else
+//			return customerJdbcRepo.save(customer);
 	}
 
 	@Override
 	public Customer searchCustomerById(int id) {
 		log.info("Inside Search Customer By Id [Customer Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return customerJpaRepo.findById(id).orElse(null);
-		else
-			return customerJdbcRepo.findById(id).orElse(null);		
+		return customerJpaRepo.findById(id).orElse(null);
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return customerJpaRepo.findById(id).orElse(null);
+//		else
+//			return customerJdbcRepo.findById(id).orElse(null);		
 	}
 
 }

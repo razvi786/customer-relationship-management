@@ -27,7 +27,7 @@ import lombok.ToString;
 public class Subscription implements Serializable{
 	private static final long serialVersionUID = -1491107162638602202L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private Date expiryDate;

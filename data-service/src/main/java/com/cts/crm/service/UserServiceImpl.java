@@ -26,19 +26,21 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User createUser(User user) {
 		log.info("Inside Create User [User Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return userJpaRepo.save(user);
-		else
-			return userJdbcRepo.save(user);
+		return userJpaRepo.save(user);
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return userJpaRepo.save(user);
+//		else
+//			return userJdbcRepo.save(user);
 	}
 
 	@Override
 	public User getUserByEmailAndPassword(String email, String password) {
 		log.info("Inside Get User By Email and Password [User Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return userJpaRepo.findByEmailAndPassword(email, password).orElse(null);
-		else
-			return userJdbcRepo.findByEmailAndPassword(email, password).orElse(null);		
+		return userJpaRepo.findByEmailAndPassword(email, password).orElse(null);
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return userJpaRepo.findByEmailAndPassword(email, password).orElse(null);
+//		else
+//			return userJdbcRepo.findByEmailAndPassword(email, password).orElse(null);		
 	}
 
 }

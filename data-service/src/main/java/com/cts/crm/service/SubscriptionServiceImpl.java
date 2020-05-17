@@ -30,43 +30,47 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public Subscription getSubscriptionById(int id) {
 		log.info("Inside Get Subscription By Id [Subscription Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return subscriptionJpaRepo.findById(id).orElse(null);
-		else
-			return subscriptionJdbcRepo.findById(id).orElse(null);
+		return subscriptionJpaRepo.findById(id).orElse(null);
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return subscriptionJpaRepo.findById(id).orElse(null);
+//		else
+//			return subscriptionJdbcRepo.findById(id).orElse(null);
 	}
 	
 	@Override
 	public Subscription createSubscription(Subscription subscription) {
 		log.info("Inside Create Subscription [Subscription Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return subscriptionJpaRepo.save(subscription);
-		else
-			return subscriptionJdbcRepo.save(subscription);
+		return subscriptionJpaRepo.save(subscription);
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return subscriptionJpaRepo.save(subscription);
+//		else
+//			return subscriptionJdbcRepo.save(subscription);
 	}
 	
 	@Override
 	public List<Subscription> getAllSubscriptions() {
 		log.info("Inside Get All Subscriptions [Subscription Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return subscriptionJpaRepo.findAll();
-		else
-			return subscriptionJdbcRepo.findAll();
+		return subscriptionJpaRepo.findAll();
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return subscriptionJpaRepo.findAll();
+//		else
+//			return subscriptionJdbcRepo.findAll();
 	}
 	
 	@Override
 	public List<Subscription> viewActiveSubscriptions(int customerId) {
 		log.info("Inside View Active Subscriptions [Subscription Service]");
-		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
-			return subscriptionJpaRepo.viewActiveSubscriptions(customerId);
-		else
-			return subscriptionJdbcRepo.viewActiveSubscriptions(customerId);
+		return subscriptionJpaRepo.viewActiveSubscriptions(customerId);
+//		if(properties.getJpaEnable().equalsIgnoreCase("Y"))
+//			return subscriptionJpaRepo.viewActiveSubscriptions(customerId);
+//		else
+//			return subscriptionJdbcRepo.viewActiveSubscriptions(customerId);
 	}
 	
 	@Override
-	public void batchInactiveSubscription(List<Subscription> subscriptions) {
+	public String batchInactiveSubscription(List<Subscription> subscriptions) {
 		log.info("Inside Batch Inactive Subscriptions [Subscription Service]");
-		subscriptionJdbcRepo.batchInactiveSubscription(subscriptions);
+		return subscriptionJdbcRepo.batchInactiveSubscription(subscriptions);
 	}
 	
 	//Unused in this Project

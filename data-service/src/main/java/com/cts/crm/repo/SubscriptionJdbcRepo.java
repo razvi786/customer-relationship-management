@@ -58,12 +58,13 @@ public class SubscriptionJdbcRepo {
 				new Object[] {customerId}, Subscription.class);
 	}
 	
-	public void batchInactiveSubscription(List<Subscription> subscriptions) {
+	public String batchInactiveSubscription(List<Subscription> subscriptions) {
 //		https://mkyong.com/spring/spring-jdbctemplate-batchupdate-example/
 //		https://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/html/jdbc.html
 		int batchSize=100;
 		ParameterizedPreparedStatementSetter<Subscription> parameterizedPreparedStatementSetter = (ps,sub) -> {ps.setInt(1, sub.getId());};
 		jdbcTemplate.batchUpdate(properties.getSubscriptionBatchInactiveSubscription(), subscriptions, batchSize, parameterizedPreparedStatementSetter);
+		return subscriptions.size()+" Subscriptions inactivated";
 	}
 
 }

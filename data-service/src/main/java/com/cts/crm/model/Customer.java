@@ -23,11 +23,14 @@ import lombok.ToString;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 8360501707009070859L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int customerId;
 	private String name;
 	private long mobileNumber;
 	private String email;
 	private String circle;
-	private String dp="../../assets/images/default.png";	
+	private String dp="../../assets/images/default.png";
+	public Customer(Integer customerId){
+		this.customerId=customerId;
+	}
 }
